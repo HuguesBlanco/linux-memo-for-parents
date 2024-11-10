@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Guide Linux</title>
+    <style>
+      /* Reset and global styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        color: #333;
+        background-color: #f5f7fa;
+        line-height: 1.8;
+        padding-bottom: 60px;
+      }
+      a {
+        color: #00509e;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+
+      /* Header */
+      header {
+        background-color: #00509e;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+      }
+      header h1 {
+        font-size: 2.5em;
+        font-weight: 600;
+      }
+
+      /* Navigation menu */
+      nav {
+        background-color: #fff;
+        padding: 15px;
+        margin-bottom: 40px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+      nav ul {
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+      }
+      nav ul li {
+        margin: 0 10px;
+        position: relative;
+      }
+      /* Separator between navigation items */
+      nav ul li:not(:last-child)::after {
+        content: "|";
+        color: #ccc;
+        margin-left: 20px;
+      }
+      nav ul li a {
+        color: #00509e;
+        font-weight: bold;
+      }
+
+      /* Main content */
+      main {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Sections and titles */
+      section {
+        margin-bottom: 60px;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+      }
+      section h2 {
+        font-size: 2em;
+        color: #00509e;
+        margin-top: 10px;
+        margin-bottom: 30px;
+        border-bottom: 2px solid #e0e6ed;
+        padding-bottom: 10px;
+        font-weight: 600;
+        scroll-margin-top: 100px; /* Adjusted for fixed nav */
+      }
+      section h3 {
+        font-size: 1.5em;
+        color: #333;
+        margin-top: 60px;
+        margin-bottom: 20px;
+        font-weight: 500;
+        border-bottom: 1px solid #e0e6ed;
+        padding-bottom: 5px;
+        scroll-margin-top: 100px; /* Adjusted for fixed nav */
+      }
+      section h4 {
+        font-size: 1.2em;
+        color: #555;
+        margin-top: 60px;
+        margin-bottom: 15px;
+        font-weight: 600;
+        scroll-margin-top: 100px; /* Adjusted for fixed nav */
+      }
+
+      /* Paragraphs and lists */
+      p {
+        margin-bottom: 25px;
+        font-size: 1.05em;
+      }
+      ul {
+        list-style: disc;
+        padding-left: 40px;
+        margin-bottom: 25px;
+      }
+      ul li {
+        margin-bottom: 15px;
+      }
+
+      /* Code blocks */
+      pre {
+        background-color: #f0f3f7;
+        padding: 15px;
+        border-radius: 6px;
+        overflow-x: auto;
+        font-size: 0.95em;
+        margin-bottom: 25px;
+      }
+      pre.code-instruction {
+        border-left: 4px solid #00509e;
+      }
+      pre.code-example {
+        background-color: #e8f5e9;
+        border-left: 4px solid #28a745;
+      }
+      code {
+        font-family: "Courier New", Courier, monospace;
+        background-color: #f0f3f7;
+        padding: 2px 6px;
+        border-radius: 4px;
+      }
+
+      /* Notes and warnings */
+      .note,
+      .warning,
+      .aside,
+      .tip,
+      .icon,
+      .not-important {
+        padding: 15px;
+        margin-bottom: 25px;
+        border-radius: 8px;
+        font-size: 1em;
+      }
+      .note {
+        background-color: #e8f5e9;
+        border-left: 5px solid #28a745;
+        color: #2d7c4e;
+      }
+      .warning {
+        background-color: #f8d7da;
+        border-left: 5px solid #dc3545;
+        color: #a12329;
+      }
+      .aside {
+        background-color: #fff3cd;
+        border-left: 5px solid #ffc107;
+        color: #856404;
+      }
+      .tip {
+        background-color: #e7f3fe;
+        border-left: 5px solid #2196f3;
+        color: #31708f;
+      }
+      .icon {
+        color: #00509e;
+        font-style: italic;
+        margin-top: 15px;
+        margin-bottom: 20px;
+        font-size: 1em;
+      }
+      .icon strong {
+        font-weight: 600;
+      }
+      .not-important {
+        background-color: #f9f9f9;
+        border-left: 5px solid #ccc;
+        color: #666;
+      }
+      .note strong,
+      .warning strong,
+      .aside strong,
+      .tip strong,
+      .not-important strong {
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body id="top">
+    <header>
+      <h1>Simple guide de Linux</h1>
+    </header>
+
+    <nav>
+      <ul>
+        <li><a href="#introduction">Introduction</a></li>
+        <li><a href="#gnome">Interface GNOME</a></li>
+        <li><a href="#systeme-fichiers">Le système de fichiers</a></li>
+        <li><a href="#internet">Naviguer sur Internet</a></li>
+        <li><a href="#bureautique">Bureautique</a></li>
+        <li><a href="#mises-a-jour">Mettre à jour le système</a></li>
+        <li><a href="#installer-programme">Installer un programme</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <section id="introduction">
+        <h2>Introduction</h2>
+        <p>
+          Cet ordinateur utilise une distribution de Linux appelée
+          <strong>Debian 12</strong>. Une distribution est la combinaison de
+          GNU/Linux et d'un ensemble de programmes préinstallés.
+        </p>
+        <p>
+          Parmi les programmes préinstallés sur Debian, on trouve notamment :
+        </p>
+        <ul>
+          <li>
+            <strong>GNOME</strong> : l'interface utilisateur qui gère le bureau,
+            les fenêtres, etc.
+            <div class="icon">
+              <strong>GNOME :</strong>
+              <strong>une empreinte de pied sur fond bleu.</strong>
+            </div>
+          </li>
+          <li>
+            <strong>Fichiers</strong> : le gestionnaire de fichiers, équivalent
+            de l'« Explorateur de fichiers » sous Windows.
+            <div class="icon">
+              <strong>Fichiers :</strong>
+              <strong>une armoire à dossiers bleue.</strong>
+            </div>
+          </li>
+          <li>
+            <strong>Firefox ESR</strong> : navigateur internet.<br />
+            <em>
+              ESR signifie que c'est une version plus stable avec un support
+              étendu.</em
+            >
+            <div class="icon">
+              <strong>Firefox ESR :</strong>
+              <strong>un renard orange entourant un globe.</strong>
+            </div>
+          </li>
+          <li>
+            <strong>Logiciels</strong> : le magasin d'applications pour
+            télécharger la plupart des programmes.
+            <div class="icon">
+              <strong>Logiciels :</strong>
+              <strong
+                >un sac de courses avec des formes géométriques
+                colorées.</strong
+              >
+            </div>
+          </li>
+          <li>
+            <strong>LibreOffice</strong> : l'équivalent de la suite Microsoft
+            Office.
+            <div class="icon">
+              <strong>LibreOffice :</strong>
+              <strong>une feuille blanche avec un coin replié.</strong>
+            </div>
+          </li>
+          <li>
+            Plein de petits jeux sont préinstallés. On peut éviter les logiciels
+            espions de Windows, pas les petits jeux inutiles.
+          </li>
+        </ul>
+        <p>
+          La particularité de Debian est sa grande utilisation de logiciels non
+          commerciaux et sa très grande stabilité.
+        </p>
+      </section>
+
+      <section id="gnome">
+        <h2>Interface GNOME</h2>
+        <p>
+          L'<strong>interface GNOME</strong> est ce que vous voyez à l'écran :
+          le bureau, les fenêtres, les icônes, etc. Elle vous permet d'interagir
+          avec l'ordinateur en utilisant la souris et le clavier.
+        </p>
+        <h3>Tableau de bord</h3>
+        <p>
+          Le <strong>tableau de bord</strong>, la barre en haut de l'écran,
+          affiche le menu des applications, l'heure, le volume, le réseau, etc.
+          C'est l'équivalent de la barre des tâches sous Windows.
+        </p>
+        <p>
+          En cliquant sur l'heure, un menu s'affiche avec les notifications,
+          comme les informations sur les mises à jour installées.
+        </p>
+        <h3>Menu des applications</h3>
+        <p>
+          Cliquez sur <strong>Activités</strong> en haut à gauche ou appuyez sur
+          la touche <code>Super</code> (la touche avec le logo Windows) pour
+          entrer dans la vue <strong>Activités</strong>. Vous pouvez aussi
+          glisser trois doigts vers le haut sur le pavé tactile.
+        </p>
+        <p>Dans cette vue, vous verrez :</p>
+        <ul>
+          <li>
+            <strong>La barre de recherche</strong> : en tapant, vous recherchez
+            dans la liste des programmes et de vos fichiers.
+          </li>
+          <li>
+            <strong>Votre bureau et les applications ouvertes</strong> : cliquez
+            dessus pour afficher l'application.
+          </li>
+          <li>
+            <strong>Le dock</strong> : avec les raccourcis vers les applications
+            les plus utilisées et les applications ouvertes.
+          </li>
+        </ul>
+        <p>
+          En cliquant sur le carré avec neuf points dans le dock (ou en
+          double-appuyant sur <code>Super</code> depuis une fenêtre normale),
+          vous entrez dans la vue des <strong>Applications</strong>.
+        </p>
+        <p>Cette fois, à la place des applications ouvertes, sont affichés :</p>
+        <ul>
+          <li>
+            Les bureaux créés. GNOME permet de créer plusieurs bureaux.
+            <br />
+            <em
+              >Attention à ne pas naviguer de l'un à l'autre par
+              inadvertance.</em
+            >
+          </li>
+          <li>La liste des applications installées sur le système.</li>
+        </ul>
+        <h3>Ouvrir les applications et basculer d'une à l'autre</h3>
+        <p>
+          Pour ouvrir une application, cliquez sur son icône. Pour la fermer,
+          comme sur Windows, cliquez sur la croix en haut à droite.
+        </p>
+        <p>Pour passer entre les applications ouvertes, vous pouvez :</p>
+        <ul>
+          <li>
+            Utiliser la vue <strong>Activités</strong> et cliquer sur une
+            fenêtre ouverte.
+          </li>
+          <li>
+            Utiliser le raccourci clavier <code>Alt</code> + <code>Tab</code>.
+          </li>
+        </ul>
+      </section>
+
+      <section id="systeme-fichiers">
+        <h2>Le système de fichiers</h2>
+        <p>
+          En ouvrant l'application <strong>Fichiers</strong>, vous accédez au
+          gestionnaire de fichiers dans le dossier <strong>Home</strong>.
+          <br />
+          <strong>Home</strong> est le dossier destiné aux fichiers personnels.
+          Tous vos fichiers et dossiers doivent être créés dans ce dossier. Pour
+          le reste, cela fonctionne comme sur Windows.
+          <br />
+          <em
+            >Comme sur Windows, des sous-dossiers Images, Documents, Vidéos,
+            etc., sont pré-créés.</em
+          >
+        </p>
+      </section>
+
+      <section id="internet">
+        <h2>Naviguer sur Internet</h2>
+        <h3>Utiliser le navigateur par défaut : LibreWolf</h3>
+        <p>
+          Pour accéder à Internet, utilisez <strong>LibreWolf</strong>, un
+          navigateur axé sur la sécurité et la confidentialité. LibreWolf est
+          basé sur Firefox mais configuré avec des options renforçant la
+          confidentialité.
+        </p>
+        <div class="icon">
+          <strong>LibreWolf :</strong>
+          <strong>un loup sur un fond bleu.</strong>
+        </div>
+
+        <h3>Alternative : Firefox</h3>
+        <p>
+          Si un site web ne fonctionne pas correctement avec LibreWolf (cela
+          peut arriver à cause de ses paramètres de sécurité stricts), utilisez
+          <strong>Firefox</strong>.
+        </p>
+        <div class="icon">
+          <strong>Firefox :</strong>
+          <strong>un renard orange entourant un globe.</strong>
+        </div>
+      </section>
+
+      <section id="bureautique">
+        <h2>Bureautique</h2>
+        <p>
+          L'équivalent de Microsoft Office sur Debian est
+          <strong>LibreOffice</strong>, qui offre tous les programmes
+          similaires.
+        </p>
+        <div class="icon">
+          <strong>LibreOffice :</strong>
+          <strong>une feuille blanche avec un coin replié.</strong>
+        </div>
+        <h3>Applications LibreOffice</h3>
+        <ul>
+          <li>
+            <strong>LibreOffice Writer</strong> : comme Word, pour les documents
+            texte.
+            <div class="icon">
+              <strong>LibreOffice Writer :</strong>
+              <strong>une feuille avec un coin replié et un stylo bleu.</strong>
+            </div>
+          </li>
+          <li>
+            <strong>LibreOffice Calc</strong> : comme Excel, pour les feuilles
+            de calcul.
+            <div class="icon">
+              <strong>LibreOffice Calc :</strong>
+              <strong
+                >une feuille avec un coin replié et un tableau vert.</strong
+              >
+            </div>
+          </li>
+          <li>
+            <strong>LibreOffice Impress</strong> : comme PowerPoint, pour les
+            présentations.
+            <div class="icon">
+              <strong>LibreOffice Impress :</strong>
+              <strong
+                >une feuille avec un coin replié et un écran orange.</strong
+              >
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section id="mises-a-jour">
+        <h2>Mettre à jour le système et les programmes</h2>
+        <p>
+          Il est important de garder l'ordinateur à jour pour des raisons de
+          sécurité. Les mises à jour corrigent des bugs et des failles
+          exploitables par des virus.
+          <br />
+          Sous Linux, les mises à jour ne sont pas gênantes et ne modifient pas
+          vos réglages comme sur Windows.
+          <br />
+          <strong>Pour être fiable, l'ordinateur doit être à jour.</strong>
+        </p>
+        <h3>Mises à jour automatiques</h3>
+        <p>
+          <strong>
+            Par défaut, les mises à jour sont installées
+            automatiquement.</strong
+          >
+          <br />
+          Lorsque vous éteignez l'ordinateur et que des mises à jour sont
+          disponibles, il vous proposera de les installer (une petite case
+          cochée dans le pop-up). Laissez la case cochée, ou cochez-la si elle
+          ne l'est pas, et l'ordinateur s'occupera des mises à jour.
+          <br />
+          Lors de l'extinction, il se peut que l'ordinateur vous demande le mot
+          de passe.
+        </p>
+
+        <div class="not-important">
+          <div class="note">
+            <strong>Note :</strong> Puisque les mises à jour sont automatiques,
+            il n'est pas nécessaire de s'en inquiéter. Les points suivants sont
+            pour information.
+          </div>
+          <h3>Vérifier manuellement avec "Logiciels"</h3>
+          <ul>
+            <li>
+              Ouvrez le menu des applications en cliquant sur
+              <strong>Activités</strong>.
+            </li>
+            <li>
+              Cliquez sur <strong>Logiciels</strong>.
+              <div class="icon">
+                <strong>Logiciels :</strong>
+                <strong
+                  >un sac de courses avec des formes géométriques
+                  colorées.</strong
+                >
+              </div>
+            </li>
+            <li>Allez dans l'onglet <strong>Mises à jour</strong>.</li>
+            <li>
+              Si des mises à jour sont disponibles, cliquez sur
+              <strong>Installer les mises à jour</strong>.
+            </li>
+          </ul>
+
+          <h3>Utiliser le Terminal pour les mises à jour</h3>
+          <p>
+            Les opérations en ligne de commande se font avec l'application
+            <strong>Terminal</strong>. Une fois ouverte, il suffit d'y taper les
+            commandes.
+          </p>
+          <div class="icon">
+            <strong>Terminal :</strong>
+            <strong>un écran noir avec un curseur blanc.</strong>
+          </div>
+          <div class="tip">
+            <strong>Astuce :</strong> Pour copier du texte depuis le Terminal,
+            utilisez <code>Ctrl</code> + <code>Shift</code> + <code>C</code> au
+            lieu de <code>Ctrl</code> + <code>C</code>.
+            <br />
+            Pour coller du texte, utilisez <code>Ctrl</code> +
+            <code>Shift</code> + <code>V</code>.
+          </div>
+          <h4>Mettre à jour avec le Terminal</h4>
+          <p>
+            Dans le Terminal, tapez la commande suivante et appuyez sur
+            <code>Entrée</code> :
+          </p>
+          <pre class="code-instruction">
+sudo apt update && sudo apt upgrade</pre
+          >
+          <p><strong>Explications :</strong></p>
+          <ul>
+            <li>
+              <code>sudo</code> : Exécute la commande avec les privilèges
+              administrateur.
+            </li>
+            <li>
+              <code>apt</code> : Gestionnaire de paquets qui permet d'installer,
+              de mettre à jour et de supprimer des programmes.
+            </li>
+            <li>
+              <code>update</code> : Met à jour la liste des programmes
+              disponibles.
+            </li>
+            <li>
+              <code>upgrade</code> : Installe les mises à jour des programmes.
+            </li>
+            <li>
+              <code>&&</code> : Enchaîne deux commandes l'une après l'autre.
+            </li>
+          </ul>
+          <p>
+            La première fois après avoir tapé la commande <code>sudo</code>,
+            l'ordinateur vous demandera de taper votre mot de passe. Ensuite, il
+            le retient pour cinq minutes.
+          </p>
+        </div>
+      </section>
+
+      <section id="installer-programme">
+        <h2>Installer un programme</h2>
+        <p>
+          Il existe plusieurs méthodes pour installer un programme sur Debian,
+          classées ici par ordre de préférence.
+        </p>
+        <h3>Utiliser le magasin d'applications ("Logiciels")</h3>
+        <p>
+          La méthode la plus simple est d'utiliser le programme
+          <strong>Logiciels</strong> :
+        </p>
+        <ul>
+          <li>
+            Ouvrez <strong>Logiciels</strong> depuis le menu des applications.
+            <div class="icon">
+              <strong>Logiciels :</strong>
+              <strong
+                >un sac de courses avec des formes géométriques
+                colorées.</strong
+              >
+            </div>
+          </li>
+          <li>
+            Utilisez la barre de recherche (en haut à droite) pour trouver
+            l'application souhaitée.
+          </li>
+          <li>Cliquez sur l'application dans la liste des résultats.</li>
+          <li>Cliquez sur le bouton <strong>Installer</strong>.</li>
+        </ul>
+        <p>
+          <strong>Exemple :</strong> Pour installer le lecteur vidéo
+          <strong>VLC</strong> :
+        </p>
+        <ul>
+          <li>Recherchez "VLC" dans <strong>Logiciels</strong>.</li>
+          <li>Sélectionnez-le dans les résultats.</li>
+          <li>Cliquez sur <strong>Installer</strong>.</li>
+        </ul>
+
+        <h3>Installer via le Terminal avec apt</h3>
+        <p>
+          Si vous ne trouvez pas l'application dans Logiciels, utilisez le
+          Terminal :
+        </p>
+        <h4>Mettre à jour la liste des programmes</h4>
+        <p>Dans le Terminal, tapez la commande suivante :</p>
+        <pre class="code-instruction">sudo apt update</pre>
+        <p><strong>Explications :</strong></p>
+        <ul>
+          <li>
+            <code>sudo</code> : Exécute la commande avec les privilèges
+            administrateur.
+          </li>
+          <li>
+            <code>apt</code> : C'est l'application qui gère l'installation des
+            programmes.
+          </li>
+          <li>
+            <code>update</code> : Met à jour la liste des programmes
+            disponibles.
+          </li>
+        </ul>
+
+        <h4>Rechercher une application</h4>
+        <p>
+          Dans le Terminal, tapez la commande suivante pour chercher une
+          application :
+        </p>
+        <pre class="code-instruction">apt search nom_de_l_application</pre>
+        <p><strong>Explications :</strong></p>
+        <ul>
+          <li><code>apt</code> : Le gestionnaire de paquets.</li>
+          <li>
+            <code>search</code> : Commande pour rechercher des programmes.
+          </li>
+          <li>
+            <code>nom_de_l_application</code> : Remplacez par le nom du
+            programme que vous cherchez.
+          </li>
+        </ul>
+        <p>
+          <strong>Exemple :</strong> Pour chercher le lecteur vidéo
+          <strong>VLC</strong> :
+        </p>
+        <pre class="code-example">apt search vlc</pre>
+        <p>
+          Une liste de toutes les applications correspondant à votre recherche
+          s'affiche. Il faut trouver votre application dans la liste.
+        </p>
+
+        <h4>Installer une application</h4>
+        <p>
+          Une fois que vous avez trouvé le nom exact de l'application,
+          installez-la avec cette commande :
+        </p>
+        <pre class="code-instruction">
+sudo apt install nom_de_l_application</pre
+        >
+        <p><strong>Explications :</strong></p>
+        <ul>
+          <li>
+            <code>sudo</code> : Exécute la commande avec les privilèges
+            administrateur.
+          </li>
+          <li>
+            <code>apt install</code> : Commande pour installer une application.
+          </li>
+          <li>
+            <code>nom_de_l_application</code> : Remplacez par le nom du
+            programme que vous voulez installer.
+          </li>
+        </ul>
+        <p><strong>Exemple :</strong></p>
+        <pre class="code-example">sudo apt install vlc</pre>
+
+        <h3>Installer en téléchargeant le fichier</h3>
+        <p>
+          Si l'application n'est pas disponible via Logiciels ou apt,
+          téléchargez-la depuis le site officiel :
+        </p>
+        <div class="warning">
+          <strong>Attention :</strong> Utilisez cette méthode en dernier
+          recours. Téléchargez uniquement depuis des sites officiels pour éviter
+          les risques de virus ou de logiciels malveillants.
+        </div>
+        <ul>
+          <li>
+            Rendez-vous sur le site officiel de l'application et téléchargez le
+            fichier d'installation (généralement avec une extension
+            <code>.deb</code>).
+          </li>
+          <li>
+            Ouvrez le dossier où le fichier a été téléchargé (souvent le dossier
+            "Téléchargements").
+          </li>
+          <li>Double-cliquez sur le fichier téléchargé.</li>
+          <li>
+            Une fenêtre s'ouvre pour installer l'application. Cliquez sur
+            <strong>Installer</strong> et suivez les instructions.
+          </li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>
