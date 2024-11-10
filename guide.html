@@ -4,24 +4,11 @@
     <meta charset="UTF-8" />
     <title>Guide Linux</title>
     <style>
-      /* ===================== */
-      /* Variables de couleurs */
-      /* ===================== */
-      :root {
-        --primary-color: #33475b;
-        --secondary-color: #28a745;
-        --background-color: #f5f7fa;
-        --text-color: #333;
-        --header-font-size: 2.5rem;
-        --section-padding: 3rem;
-        --max-width: 900px;
-      }
-
       /* ============ */
       /* Base & Reset */
       /* ============ */
       html {
-        font-size: 16px;
+        font-size: 1rem;
       }
 
       *,
@@ -37,13 +24,13 @@
       /* ================= */
       body {
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        color: var(--text-color);
-        background-color: var(--background-color);
+        color: #333;
+        background-color: #f5f7fa;
         line-height: 1.8;
       }
 
       a {
-        color: var(--primary-color);
+        color: #33475b;
         text-decoration: none;
       }
 
@@ -55,14 +42,14 @@
       /* En-tête */
       /* =========== */
       header {
-        background-color: var(--primary-color);
+        background-color: #33475b;
         color: #fff;
         padding: 1.25rem;
         text-align: center;
       }
 
       header h1 {
-        font-size: var(--header-font-size);
+        font-size: 2.5rem;
         font-weight: 600;
       }
 
@@ -93,7 +80,6 @@
         position: relative;
       }
 
-      /* Séparateur entre les éléments de navigation */
       nav ul li:not(:last-child)::after {
         content: "|";
         color: #ccc;
@@ -101,7 +87,7 @@
       }
 
       nav ul li a {
-        color: var(--primary-color);
+        color: #33475b;
         font-weight: bold;
       }
 
@@ -109,7 +95,7 @@
       /* Contenu principal */
       /* ================ */
       main {
-        max-width: var(--max-width);
+        max-width: 56.25rem;
         margin: 0 auto;
         padding: 0 1.25rem;
       }
@@ -119,7 +105,7 @@
       /* ================ */
       section {
         margin-bottom: 3.75rem;
-        padding: var(--section-padding);
+        padding: 3rem;
         background-color: #fff;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         border-radius: 0.5rem;
@@ -127,7 +113,7 @@
 
       section h2 {
         font-size: 1.9rem;
-        color: var(--primary-color);
+        color: #33475b;
         margin-top: 0.625rem;
         margin-bottom: 1.875rem;
         border-bottom: 2px solid #e0e6ed;
@@ -187,12 +173,12 @@
       }
 
       pre.code-instruction {
-        border-left: 4px solid var(--primary-color);
+        border-left: 4px solid #33475b;
       }
 
       pre.code-example {
         background-color: #e8f5e9;
-        border-left: 4px solid var(--secondary-color);
+        border-left: 4px solid #28a745;
       }
 
       code {
@@ -218,7 +204,7 @@
 
       .note {
         background-color: #e8f5e9;
-        border-left: 5px solid var(--secondary-color);
+        border-left: 5px solid #28a745;
         color: #2d7c4e;
       }
 
